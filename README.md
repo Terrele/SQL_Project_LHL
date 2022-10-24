@@ -1,17 +1,19 @@
 # Final-Project-Transforming-and-Analyzing-Data-with-SQL
 
 ## Project/Goals
-(fill in your description and goals here)
+This is my SQL project
 
 ## Process
 ### (your step 1)
+1. Import csv to pgadmin
 ### (your step 2)
+2. join all the tables together before analyzing it.
 
 ## Results
-(fill in what you discovered this data could tell you and how you used the data to answer those questions)
+This data could tell you which products were the best selling in each country and city, what was most profitable and which products did not sell.
 
 ## Challenges 
-(discuss challenges you faced in the project)
+Importing the csv file to pgadmin.
 
 ## Future Goals
 (what would you do if you had more time?)
