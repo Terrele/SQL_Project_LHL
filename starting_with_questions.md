@@ -6,11 +6,11 @@ Answer the following questions and provide the SQL queries used to find the answ
 
 SQL Queries: 
 
-select city, country, SUM(session."totalTransactionRevenue") as rev
+select city, country, SUM(totaltransactionrevenue) as rev
 FROM session
 WHERE city != 'not available in demo dataset'
 GROUP BY city, country
-HAVING SUM(session."totalTransactionRevenue") > 1
+HAVING SUM(totaltransactionrevenue) > 1
 ORDER BY rev DESC
 LIMIT 1
 
@@ -28,10 +28,8 @@ Answer:
 
 SQL Queries:
 
-select AVG(SKU.total_ordered), session.city, session.country from products 
-JOIN report ON products."SKU" = report."productSKU" 
-JOIN session ON session."productSKU" = report."productSKU"
-JOIN SKU ON session."productSKU" = SKU."productSKU"
+select AVG(SKU.total_ordered), session.city, session.country from session
+JOIN SKU ON session.productsku = SKU.productsku
 GROUP BY session.city, session.country
 ORDER BY avg desc
 
@@ -69,11 +67,11 @@ Answer:
 
 SQL Queries:
 
-select products."name", max(products."orderedquantity") as best, session."city", session."country" from products 
-JOIN report ON products."SKU" = report."productSKU" 
-JOIN session ON session."productSKU" = report."productSKU"
-JOIN SKU ON session."productSKU" = SKU."productSKU"
-GROUP BY session."city", session."country", products."name"
+select products.name, max(products.orderedquantity) as best, session.city, session.country from products 
+JOIN report ON products.sku = report.productsku 
+JOIN session ON session.productsku = report.productsku
+JOIN SKU ON session.productsku = SKU.productsku
+GROUP BY session.city, session.country, products.name
 ORDER BY best desc
 
 
@@ -89,10 +87,10 @@ Couldn't get distinct cities to work. The pattern is that Kick ball is the best 
 
 SQL Queries:
 
-SELECT SUM(session."productRevenue") as rev, country, city 
+SELECT SUM(session.productrevenue) as rev, country, city 
 FROM session 
 GROUP BY country, city
-HAVING SUM(session."productRevenue") > 0
+HAVING SUM(session.productrevenue) > 0
 ORDER BY rev DESC
 
 
